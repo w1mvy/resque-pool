@@ -411,11 +411,10 @@ module Resque
       worker = ::Resque::Worker.new(*queues)
       worker.term_timeout = ENV['RESQUE_TERM_TIMEOUT'] || 4.0
       worker.term_child = ENV['TERM_CHILD']
-      if ENV['LOGGING'] || ENV['VERBOSE']
-        worker.verbose = ENV['LOGGING'] || ENV['VERBOSE']
-      end
-      if ENV['VVERBOSE']
-        worker.very_verbose = ENV['VVERBOSE']
+      if ENV['RESQUE_ENV'] == 'development'
+        Resque.logger.level = Logger::DEBUG
+      else
+        Resque.logger.level = Logger::INFO
       end
       worker
     end
