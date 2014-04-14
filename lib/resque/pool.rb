@@ -129,7 +129,7 @@ module Resque
       elsif defined?(Rails) && Rails.respond_to?(:env)
         Rails.env
       else
-        ENV['RACK_ENV'] || ENV['RAILS_ENV'] || ENV['RESQUE_ENV']
+        ENV['RACK_ENV'] || ENV['RAILS_ENV'] || ENV['RESQUE_ENV'] || ENV['PADRINO_ENV']
       end
     end
 
